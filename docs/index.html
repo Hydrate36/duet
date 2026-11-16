@@ -3,171 +3,296 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Duet — the fast, good-looking Minecraft launcher</title>
-<meta name="description" content="Duet is a free Minecraft: Java Edition launcher for Windows and Linux. Play with friends, one-click modpacks, built-in speed mods tuned for your PC, Fabric, Quilt, Forge and NeoForge, themes and skins.">
-<meta property="og:title" content="Duet — Minecraft launcher">
-<meta property="og:description" content="Duet 1.0 is out: friends in the launcher, modpacks in one click, built-in speed mods, themes and skins.">
+<title>Duet — one launcher for Minecraft and your other games</title>
+<meta name="description" content="Duet is a free launcher for Windows and Linux: Minecraft with one-click modpacks and built-in speed mods, plus Genshin Impact, Honkai: Star Rail, Wuthering Waves and NTE with pity tracking, Resin, daily check-in and redeem codes.">
+<meta property="og:title" content="Duet 1.2 — one launcher for all your games">
+<meta property="og:description" content="Minecraft with modpacks and more FPS, plus Genshin, Star Rail, Wuthering Waves and NTE with pity tracking, Resin, check-in and codes.">
 <meta property="og:image" content="https://hydrate36.github.io/duet/banner.jpg">
 <meta name="theme-color" content="#7c3aed">
 <link rel="icon" href="emblem-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07060b;--panel:rgba(255,255,255,.04);--line:rgba(255,255,255,.08);--text:#ecebf3;--muted:#a19db3;--accent:#7c3aed;--accent2:#c4a8ff;--pink:#e879f9}
+:root{--bg:#06050a;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(255,255,255,.08);--text:#eeedf5;--muted:#a3a0b5;--dim:#6f6b82;--accent:#7c3aed;--accent2:#c4a8ff;--pink:#e879f9;--gold:#f5c43c}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
-.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);background:rgba(7,6,11,.7);border-bottom:1px solid var(--line)}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(16px);background:rgba(6,5,10,.72);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
-nav .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;text-decoration:none}
-nav .brand img{width:34px;height:34px}
-nav .links{margin-left:auto;display:flex;gap:22px;font-size:14.5px;color:var(--muted)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;text-decoration:none}
+.brand img{width:32px;height:32px}
+nav .links{margin-left:auto;display:flex;gap:24px;font-size:14.5px;color:var(--muted)}
 nav .links a{text-decoration:none}nav .links a:hover{color:var(--text)}
-.hero{position:relative;overflow:hidden;padding:88px 0 70px}
-.hero::before{content:"";position:absolute;inset:-20% -10% auto;height:120%;background:radial-gradient(ellipse 60% 50% at 70% 30%,rgba(124,58,237,.38),transparent 70%),radial-gradient(ellipse 40% 40% at 90% 60%,rgba(232,121,249,.22),transparent 70%);pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--accent2);background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.35);padding:6px 12px;border-radius:999px}
-h1{font-size:clamp(44px,7vw,84px);line-height:1;letter-spacing:-3px;margin:20px 0 18px;font-weight:800;background:linear-gradient(180deg,#fff,#d6c6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{font-size:20px;color:var(--muted);max-width:540px;margin:0 0 30px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid var(--line);background:var(--panel);transition:transform .15s,background .15s}
+nav .nbtn{margin-left:8px;padding:9px 16px;border-radius:11px;background:var(--accent);font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 6px 20px rgba(124,58,237,.4)}
+
+/* hero */
+.hero{position:relative;padding:84px 0 0;text-align:center;overflow:hidden}
+.hero .stage{padding:0 24px 40px}
+.hero::before{content:"";position:absolute;inset:0 0 auto;height:900px;background:radial-gradient(ellipse 50% 45% at 50% 20%,rgba(124,58,237,.42),transparent 70%),radial-gradient(ellipse 30% 30% at 80% 35%,rgba(232,121,249,.2),transparent 70%),radial-gradient(ellipse 25% 25% at 18% 40%,rgba(245,196,60,.12),transparent 70%);pointer-events:none;z-index:0}
+.hero > *{position:relative;z-index:1}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--accent2);background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.38);padding:7px 14px;border-radius:999px;text-decoration:none}
+.eyebrow b{color:#fff}
+h1{font-size:clamp(46px,7.6vw,96px);line-height:.98;letter-spacing:-.045em;margin:22px auto 20px;font-weight:900;max-width:960px}
+h1 .grad{background:linear-gradient(100deg,#fff 10%,#d8c6ff 45%,#f0abfc 75%,#ffd76a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:680px;margin:0 auto 32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;border:1px solid var(--line);background:var(--panel);transition:transform .15s,background .15s,box-shadow .15s}
 .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}
-.btn.primary{background:linear-gradient(135deg,#8b5cf6,#6d28d9);border-color:transparent;box-shadow:0 10px 30px rgba(124,58,237,.45)}
-.btn.primary:hover{background:linear-gradient(135deg,#9d6bff,#7c3aed)}
+.btn.primary{background:linear-gradient(135deg,#8b5cf6,#6d28d9);border-color:transparent;box-shadow:0 12px 34px rgba(124,58,237,.5)}
+.btn.primary:hover{box-shadow:0 14px 40px rgba(124,58,237,.65)}
 .btn svg{width:20px;height:20px}
-.small{font-size:13px;color:var(--muted);margin-top:14px}
+.small{font-size:13px;color:var(--muted);margin-top:16px}
 .small a{color:var(--accent2)}
-.emblem{width:100%;max-width:440px;justify-self:center;filter:drop-shadow(0 30px 60px rgba(124,58,237,.45));animation:float 7s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-12px)}}
-@media (prefers-reduced-motion:reduce){.emblem{animation:none}}
-.shot{margin:10px auto 0;max-width:1100px;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 100px rgba(0,0,0,.6)}
-.shot img{display:block;width:100%}
-section{padding:80px 0}
-h2{font-size:clamp(30px,4vw,44px);letter-spacing:-1.2px;margin:0 0 12px}
-.sub{color:var(--muted);font-size:18px;max-width:640px;margin:0 0 40px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
-.card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(124,58,237,.16);color:var(--accent2);margin-bottom:14px}
-.card .ic svg{width:22px;height:22px}
-.card h3{margin:0 0 6px;font-size:18px}
-.card p{margin:0;color:var(--muted);font-size:15px}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.duo img{width:100%;border-radius:14px;border:1px solid var(--line);display:block}
+.games-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:34px 0 0}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:#dcd8ea}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.chip em{font-style:normal;font-size:11px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.window{position:relative;margin:56px auto 0;max-width:1120px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 50px 120px rgba(0,0,0,.7),0 0 0 1px rgba(124,58,237,.25),0 0 120px -30px rgba(124,58,237,.6)}
+.window img{display:block;width:100%}
+.float{position:absolute;width:30%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 70px rgba(0,0,0,.65)}
+.float img{display:block}
+.float.l{left:-6%;bottom:12%;transform:rotate(-4deg)}
+.float.r{right:-6%;top:18%;transform:rotate(4deg)}
+.stage{position:relative;max-width:1120px;margin:0 auto}
+@media (max-width:1250px){.float{display:none}}
+
+/* sections */
+section{padding:110px 0 0}
+.kicker{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.kicker.gold{color:var(--gold)}
+h2{font-size:clamp(32px,4.4vw,52px);letter-spacing:-.035em;line-height:1.05;margin:10px 0 14px;font-weight:850}
+.sub{color:var(--muted);font-size:18px;max-width:660px;margin:0 0 44px}
+.center{text-align:center}.center .sub{margin-left:auto;margin-right:auto}
+
+/* feature rows */
+.row{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;margin-bottom:96px}
+.row.flip{grid-template-columns:.75fr 1.25fr}
+.row.flip .pic{order:2}
+.pic{border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.pic img{display:block;width:100%}
+.row h3{font-size:30px;letter-spacing:-.025em;line-height:1.1;margin:8px 0 12px;font-weight:800}
+.row p{color:var(--muted);font-size:16.5px;margin:0 0 16px}
+.ticks{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+.ticks li{display:flex;gap:10px;font-size:15px;color:#d6d3e4}
+.ticks li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:6px;background:rgba(124,58,237,.2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c4a8ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/12px no-repeat}
+.note{font-size:13px;color:var(--dim);margin-top:14px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;grid-column:span 2;min-height:180px}
+.tile.w3{grid-column:span 3}.tile.w4{grid-column:span 4}
+.tile h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em}
+.tile p{margin:0;color:var(--muted);font-size:15px}
+.tile .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(124,58,237,.16);color:var(--accent2);margin-bottom:16px}
+.tile .ic svg{width:21px;height:21px}
+.tile.glow{background:linear-gradient(160deg,rgba(124,58,237,.22),rgba(255,255,255,.025) 60%);border-color:rgba(124,58,237,.4)}
+.tile .shot{margin:20px -26px -26px;border-top:1px solid var(--line)}
+.tile .shot img{display:block;width:100%}
+.big{font-size:44px;font-weight:900;letter-spacing:-.03em;line-height:1;margin:6px 0 6px;background:linear-gradient(180deg,#fff,#c4a8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* download */
 .dl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.dl .card{display:flex;flex-direction:column;gap:6px}
-.dl .card .btn{margin-top:14px;justify-content:center;padding:12px 18px;font-size:15px}
-.dl .card.rec{border-color:rgba(124,58,237,.6);background:linear-gradient(180deg,rgba(124,58,237,.14),rgba(255,255,255,.03))}
-.tag{font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--accent2)}
-details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600}
+.dl .card{display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px}
+.dl .card h3{margin:4px 0 0;font-size:20px}
+.dl .card p{margin:0;color:var(--muted);font-size:15px}
+.dl .card .btn{margin-top:16px;justify-content:center;padding:13px 18px;font-size:15px}
+.dl .card.rec{border-color:rgba(124,58,237,.65);background:linear-gradient(180deg,rgba(124,58,237,.16),rgba(255,255,255,.03))}
+.tag{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2)}
+
+/* faq */
+.faq{max-width:820px;margin:0 auto}
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--accent2);font-weight:800}
+details[open] summary::after{content:"–"}
 details p{color:var(--muted);margin:10px 0 0}
 code{background:rgba(255,255,255,.07);padding:2px 6px;border-radius:6px;font-size:13.5px}
-.new{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.new .card{position:relative;overflow:hidden;padding:28px;background:linear-gradient(180deg,rgba(124,58,237,.16),rgba(255,255,255,.03));border-color:rgba(124,58,237,.45)}
-.new .card::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(232,121,249,.22),transparent 70%);pointer-events:none}
-.new .card h3{font-size:20px;margin:0 0 8px}
-.new ul{margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
-.new li{margin:4px 0}
-.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#8b5cf6,#e879f9);padding:4px 10px;border-radius:999px;margin-bottom:14px}
-@media (max-width:900px){.new{grid-template-columns:1fr}}
-footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);font-size:13.5px;text-align:center}
-footer img{width:44px;opacity:.9}
-footer .legal{font-size:11.5px;letter-spacing:.3px;margin-top:6px;opacity:.75}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.emblem{max-width:280px;order:-1}.grid,.dl{grid-template-columns:1fr 1fr}nav .links{display:none}}
-@media (max-width:600px){.grid,.dl,.duo{grid-template-columns:1fr}.hero{padding:50px 0}.lead{font-size:17px}}
+
+.final{margin:120px auto 0;max-width:1120px;border-radius:28px;padding:64px 32px;text-align:center;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.45),transparent 70%),var(--panel);border:1px solid rgba(124,58,237,.35)}
+.final h2{margin-top:0}
+footer{border-top:1px solid var(--line);margin-top:110px;padding:36px 0 50px;color:var(--muted);font-size:13.5px;text-align:center}
+footer img{width:40px;opacity:.9}
+footer .legal{font-size:11.5px;letter-spacing:.2px;margin-top:8px;opacity:.7;max-width:760px;margin-left:auto;margin-right:auto}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media (max-width:960px){.row,.row.flip{grid-template-columns:1fr;gap:28px;margin-bottom:72px}.row.flip .pic{order:0}.bento{grid-template-columns:1fr 1fr}.tile,.tile.w3,.tile.w4{grid-column:span 2}.dl{grid-template-columns:1fr}nav .links{display:none}}
 </style>
 </head>
 <body>
 <nav><div class="wrap">
   <a class="brand" href="#"><img src="emblem-512.png" alt="">Duet</a>
-  <div class="links"><a href="#new">New in 1.0</a><a href="#features">Features</a><a href="#download">Download</a><a href="#faq">FAQ</a><a href="https://github.com/Hydrate36/duet">GitHub</a></div>
+  <div class="links"><a href="#games">Games</a><a href="#minecraft">Minecraft</a><a href="#download">Download</a><a href="#faq">FAQ</a><a href="https://github.com/Hydrate36/duet">GitHub</a></div>
+  <a class="nbtn" href="#download">Download</a>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow" id="ver">Duet 1.0 is out · Free · Windows &amp; Linux</span>
-    <h1>Duet</h1>
-    <p class="lead">The fast, good-looking Minecraft launcher. Play with your friends, get modpacks in one click and more FPS out of the box — with themes, skins, and updates that install themselves.</p>
-    <div class="cta">
-      <a class="btn primary" id="main-dl" href="https://github.com/Hydrate36/duet/releases/latest">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
-        <span id="main-dl-text">Download Duet</span>
-      </a>
-      <a class="btn" href="#new">What's new in 1.0</a>
-    </div>
-    <div class="small" id="other">Also for <a href="#download">Linux and Windows</a>.</div>
+  <a class="eyebrow" href="#games" id="ver"><b>New in 1.2</b> · Duet now launches your other games too</a>
+  <h1>One launcher.<br><span class="grad">All your games.</span></h1>
+  <p class="lead">Minecraft with one-click modpacks and more FPS — plus Genshin Impact, Honkai: Star Rail, Wuthering Waves and NTE, with pity tracking, Resin, daily check-in and redeem codes in one place.</p>
+  <div class="cta">
+    <a class="btn primary" id="main-dl" href="https://github.com/Hydrate36/duet/releases/latest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+      <span id="main-dl-text">Download Duet</span>
+    </a>
+    <a class="btn" href="#games">See what's new</a>
   </div>
-  <img class="emblem" src="emblem-512.png" alt="Duet emblem">
+  <div class="small" id="other">Free · Windows &amp; Linux · updates itself</div>
+  <div class="games-row">
+    <span class="chip" style="--c:#7cc95c"><i></i>Minecraft</span>
+    <span class="chip" style="--c:#f5c43c"><i></i>Genshin Impact</span>
+    <span class="chip" style="--c:#7dd3fc"><i></i>Honkai: Star Rail</span>
+    <span class="chip" style="--c:#5eead4"><i></i>Wuthering Waves <em>beta</em></span>
+    <span class="chip" style="--c:#f472b6"><i></i>Neverness to Everness</span>
+  </div>
 </div>
-<div class="wrap"><div class="shot"><img src="home.jpg" alt="Duet home screen"></div></div>
+<div class="stage">
+  <div class="window"><img src="shot-home.jpg" alt="Duet's Home: what you played last, continue playing, and your week"></div>
+</div>
 </header>
 
-<section id="new"><div class="wrap">
-  <span class="pill">New in 1.0</span>
-  <h2>Out of beta, and made for playing together</h2>
-  <p class="sub">The first official release. Everything from the beta stays exactly as you set it up.</p>
-  <div class="new">
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/></svg></div>
-      <h3>Friends</h3><p>See who's online in Duet and what they're playing — then join their server with one click.</p>
-      <ul><li>Add friends by their Minecraft name</li><li>Join starts your matching modpack and connects</li><li>Show or hide your game and server anytime</li><li>Your login never leaves your PC</li></ul></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></div>
-      <h3>First-start setup</h3><p>Every new modpack starts with a few quick questions, so you never dig through menus.</p>
-      <ul><li>Menu key, FOV, brightness, GUI size</li><li>Sensitivity, toggle sprint and sneak</li><li>Render distance, sound volumes</li><li>Copy everything from another modpack in one click</li></ul></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-      <h3>HUD editor</h3><p>Place FPS, CPS, armor, effects and the rest right on top of your game.</p>
-      <ul><li>Drag elements — they snap into place</li><li>Size and background sliders</li><li>Right-click for all of an element's settings</li><li>Show or hide anything from one list</li></ul></div>
+<section id="games"><div class="wrap">
+  <div class="center reveal">
+    <span class="kicker gold">New in 1.2 · Games</span>
+    <h2>Every game gets its own launcher screen</h2>
+    <p class="sub">Duet finds your games through HoYoPlay and Steam and gives each one a page that looks like its own launcher — the current art, the news, a big Start button — with Duet's extras on top.</p>
+  </div>
+
+  <div class="row reveal">
+    <div class="pic"><img src="shot-lobby-hsr.jpg" alt="Honkai: Star Rail page with news, pity and Start game" loading="lazy"></div>
+    <div>
+      <span class="kicker">Game pages</span>
+      <h3>Feels like home. With a little purple.</h3>
+      <p>Key art and news come straight from the official launchers, so every update shows up here the same day.</p>
+      <ul class="ticks">
+        <li>Start the game, open its launcher, or open its folder</li>
+        <li>"Version 4.8 is out" and pre-download notices</li>
+        <li>Playtime and last played for every game</li>
+        <li>Not installed yet? An Install button opens HoYoPlay or Steam</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row flip reveal">
+    <div class="pic"><img src="shot-pity.jpg" alt="Pity tracking with active banners and 5-star history" loading="lazy"></div>
+    <div>
+      <span class="kicker">Pity tracking</span>
+      <h3>Always know how close you are</h3>
+      <p>Duet reads your wish and warp history by itself whenever you open it in game — no links to paste.</p>
+      <ul class="ticks">
+        <li>Pity for every banner, with soft and hard pity alerts</li>
+        <li>Your 50/50 record, luck and odds for the next pulls</li>
+        <li>Active banners with their featured characters</li>
+        <li>Export to UIGF for any other tracker</li>
+      </ul>
+      <div class="note">Genshin Impact and Honkai: Star Rail. Wuthering Waves in beta.</div>
+    </div>
+  </div>
+
+  <div class="row reveal">
+    <div class="pic"><img src="shot-today.jpg" alt="Today panel with Resin, check-in, reset timers and redeem codes" loading="lazy"></div>
+    <div>
+      <span class="kicker">Today</span>
+      <h3>Resin, dailies and check-in — handled</h3>
+      <p>Sign in to HoYoLAB on HoYoLAB's own page and Duet shows what's waiting for you today.</p>
+      <ul class="ticks">
+        <li>Resin / Trailblaze Power and when it's full</li>
+        <li>Daily check-in, every day automatically</li>
+        <li>Daily, weekly, Abyss and Theater reset timers</li>
+        <li>Fresh redeem codes, one click to redeem</li>
+      </ul>
+    </div>
   </div>
 </div></section>
 
-<section id="features"><div class="wrap">
-  <h2>Everything you need, nothing in the way</h2>
-  <p class="sub">Built for players who just want to play — and for the ones who like to tweak everything.</p>
-  <div class="grid">
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8l-9-5-9 5v8l9 5z"/><path d="M3.3 7.5L12 12l8.7-4.5M12 22V12"/></svg></div><h3>Every mod loader</h3><p>Fabric, Quilt, Forge and NeoForge. Duet installs the loader and the right Java for you.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></div><h3>Modpacks in one click</h3><p>Browse Modrinth's modpacks or drop in a .mrpack. Minecraft, mods and configs are set up for you — and a badge shows when mods have updates.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Built for FPS</h3><p>Built-in speed mods like Sodium and Lithium, NVIDIA turbo on RTX and GTX 16 cards, and an FPS check that shows what slows your game down. Duet tunes memory and render distance to your PC by itself.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>See further</h3><p>Turn on Far view for 50+ chunk render distance with Voxy or Distant Horizons — one switch.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l-5 3 2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/></svg></div><h3>Skins &amp; capes</h3><p>A 3D skin preview, your own skin library, copy any player's skin and switch capes in a click.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Crash &amp; lag doctor</h3><p>When the game crashes, Duet tells you why in plain words and fixes it. When it lagged, Duet shows which mod froze it and how to fix that too.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9c0-.6-.5-1-1-1h-3a2 2 0 0 1-2-2V6c0-.6-.4-1-1-1"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="8" cy="15" r="1"/></svg></div><h3>Themes that celebrate</h3><p>Seven colour themes plus seasonal ones for Halloween, Christmas, New Year and more. Video backgrounds and music.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M5 12h14M5 16h9"/></svg></div><h3>36 languages</h3><p>English, Deutsch, Français, Español, Italiano, Polski, Русский, Türkçe, 日本語, 简体中文, 繁體中文 and 25 more European languages.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><h3>Move in, keep everything</h3><p>Copies your worlds, mods and settings from Modrinth, Dawn, Prism, CurseForge and more. Duet updates itself, too.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></div><h3>Share a modpack</h3><p>Send a friend your whole setup as one small file — mods, configs, shaders and servers, worlds if you want. Your login is never inside.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div><h3>Screenshot gallery</h3><p>Every screenshot from every modpack in one place. Copy one for Discord, open its folder or make it your background.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/></svg></div><h3>Duet Mods built in</h3><p>FPS, CPS, armor, effects, crosshair and more for Fabric and Quilt 1.21.9–1.21.11 — loaded by the launcher, nothing lands in your mods folder.</p></div>
+<section><div class="wrap">
+  <div class="center reveal">
+    <span class="kicker">Also new</span>
+    <h2>A cleaner Duet</h2>
+    <p class="sub">A new layout that shows everything at a glance — for Minecraft and everything else you play.</p>
   </div>
-  <div class="duo"><img src="performance.jpg" alt="Performance settings"><img src="halloween.jpg" alt="Halloween theme"></div>
+  <div class="bento reveal">
+    <div class="tile w4 glow"><h3>One Home for everything</h3><p>Whatever you played last is on top. Continue playing mixes your modpacks and your games, and a weekly chart shows where your time went.</p><div class="shot"><img src="shot-week.jpg" alt="Weekly playtime chart" loading="lazy"></div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div><h3>Ctrl + K</h3><p>Type a modpack, a game or a page and jump right there.</p><div class="big">Ctrl K</div></div>
+    <div class="tile w3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></div><h3>A real Mods tab</h3><p>Names, icons and versions from Modrinth. Turn mods on and off, update everything, or delete them to the Recycle Bin — Duet warns you when another mod still needs one.</p><div class="shot"><img src="shot-mods.jpg" alt="Mods tab" loading="lazy"></div></div>
+    <div class="tile w3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.3 3.3-5.5 6.5-5.5s5.9 2.2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c-.4-2.3-1.7-4-3.5-4.9"/></svg></div><h3>Pity with friends</h3><p>See who's about to hit soft pity next to their name — and when they're playing Genshin or Star Rail. Turn it off anytime.</p><div class="shot"><img src="shot-friends.jpg" alt="Friends with pity" loading="lazy"></div></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div><h3>All screenshots</h3><p>Genshin, NTE and Minecraft screenshots in one gallery.</p></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h.01M12 12h.01M16 12h.01"/><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/></svg></div><h3>Discord status</h3><p>Shows the game you're in, with its icon and your pity.</p></div>
+    <div class="tile"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg></div><h3>Safer updates</h3><p>Updating a mod in one modpack never changes it in your others.</p></div>
+  </div>
+</div></section>
+
+<section id="minecraft"><div class="wrap">
+  <div class="center reveal">
+    <span class="kicker">Minecraft</span>
+    <h2>Still the fastest way to play Minecraft</h2>
+    <p class="sub">Everything Duet already did — modpacks, more FPS, friends and themes — is still here.</p>
+  </div>
+  <div class="bento reveal">
+    <div class="tile"><h3>Every mod loader</h3><p>Fabric, Quilt, Forge and NeoForge. Duet installs the loader and the right Java for you.</p></div>
+    <div class="tile"><h3>Modpacks in one click</h3><p>Browse Modrinth's modpacks or drop in an .mrpack. Mods, configs and shaders are set up for you.</p></div>
+    <div class="tile"><h3>Built for FPS</h3><p>Built-in speed mods like Sodium and Lithium, NVIDIA turbo, and an FPS check that shows what slows your game down.</p></div>
+    <div class="tile"><h3>See further</h3><p>Far view: 50+ chunk render distance with Voxy or Distant Horizons, one switch.</p></div>
+    <div class="tile"><h3>Friends</h3><p>See who's online and what they're playing, then join their server with one click.</p></div>
+    <div class="tile"><h3>Crash &amp; lag doctor</h3><p>Duet explains crashes in plain words and shows which mod froze your game.</p></div>
+    <div class="tile"><h3>Skins &amp; capes</h3><p>A 3D preview, a skin library, copy any player's skin and switch capes.</p></div>
+    <div class="tile"><h3>Themes that celebrate</h3><p>Seven colour themes plus seasonal ones. Video backgrounds and music.</p></div>
+    <div class="tile"><h3>Move in, keep everything</h3><p>Copies worlds, mods and settings from Modrinth, Dawn, Prism, CurseForge and more.</p></div>
+    <div class="tile w3"><h3>Share a modpack</h3><p>Send a friend your whole setup as one small file — mods, configs, shaders and servers, worlds if you want. Your login is never inside.</p></div>
+    <div class="tile w3"><h3>36 languages</h3><p>English, Deutsch, Français, Español, Italiano, Polski, Русский, Türkçe, 日本語, 简体中文, 繁體中文 and 25 more.</p></div>
+  </div>
 </div></section>
 
 <section id="download"><div class="wrap">
-  <h2>Download</h2>
-  <p class="sub">Free. Pick your system — after that, Duet keeps itself updated.</p>
-  <div class="dl">
-    <div class="card" data-os="win"><span class="tag">Windows 10 / 11</span><h3>Installer</h3><p>Installs in seconds, updates automatically.</p><a class="btn primary" data-asset="x64-setup.exe" href="https://github.com/Hydrate36/duet/releases/latest">Download .exe</a></div>
+  <div class="center reveal">
+    <span class="kicker">Download</span>
+    <h2>Get Duet</h2>
+    <p class="sub">Free. Pick your system — after that, Duet keeps itself updated.</p>
+  </div>
+  <div class="dl reveal">
+    <div class="card" data-os="win"><span class="tag">Windows 10 / 11</span><h3>Installer</h3><p>Installs in seconds, updates automatically. Games tab included.</p><a class="btn primary" data-asset="x64-setup.exe" href="https://github.com/Hydrate36/duet/releases/latest">Download .exe</a></div>
     <div class="card" data-os="linux"><span class="tag">Linux · any distro</span><h3>AppImage</h3><p>Runs everywhere, updates automatically. Make it executable, then open it.</p><a class="btn" data-asset="amd64.AppImage" href="https://github.com/Hydrate36/duet/releases/latest">Download AppImage</a></div>
     <div class="card" data-os="deb"><span class="tag">Ubuntu · Debian · Mint</span><h3>.deb package</h3><p>Installs with your package manager, codecs included.</p><a class="btn" data-asset="amd64.deb" href="https://github.com/Hydrate36/duet/releases/latest">Download .deb</a></div>
   </div>
-  <p class="small">All versions and release notes: <a href="https://github.com/Hydrate36/duet/releases">GitHub releases</a>.</p>
+  <p class="small center">All versions and release notes: <a href="https://github.com/Hydrate36/duet/releases">GitHub releases</a>.</p>
 </div></section>
 
 <section id="faq"><div class="wrap">
-  <h2>Questions</h2>
-  <details><summary>Windows says "Windows protected your PC"</summary><p>Duet isn't code-signed yet, so SmartScreen warns about new apps. Click <b>More info → Run anyway</b>. Official downloads are only on this site and on GitHub.</p></details>
-  <details><summary>Do I need a Minecraft account?</summary><p>Yes — you sign in with the Microsoft account that owns Minecraft: Java Edition, on Microsoft's own page. Duet never sees your password. Microsoft sign-in is currently waiting for Mojang's approval for new launchers.</p></details>
-  <details><summary>Can I bring my stuff from another launcher?</summary><p>Yes. On first start Duet asks whether to copy your instances from the Modrinth App, Dawn (Feather), Prism, MultiMC, CurseForge, ATLauncher, GDLauncher or the official launcher — worlds, mods, packs, settings and servers. It's a copy: the other launcher keeps its files, and account logins are never copied.</p></details>
-  <details><summary>Who can see what I'm playing?</summary><p>Only the friends you added, and only what you allow: in the Friends page you can look offline, hide what you're playing, or hide your server. Duet checks your account with Mojang the same way Minecraft servers do, so your login never leaves your PC.</p></details>
-  <details><summary>A video background doesn't play on Linux</summary><p>Use a <code>.webm</code> video, or install the codecs: <code>sudo apt install gstreamer1.0-libav gstreamer1.0-plugins-good</code>.</p></details>
+  <div class="center reveal"><span class="kicker">FAQ</span><h2>Questions</h2></div>
+  <div class="faq reveal">
+    <details><summary>Can Duet get my game account banned?</summary><p>Duet never changes game files or game memory. It starts the game the same way HoYoPlay or Steam does, reads your pull history through the same official link the game opens, and talks to HoYoLAB like its website does. That's the same way other popular pity trackers work.</p></details>
+    <details><summary>Is signing in to HoYoLAB safe?</summary><p>You sign in on HoYoLAB's own page inside a Duet window — Duet never sees your password. Afterwards Duet only uses the sign-in to read your Resin and dailies and to claim the daily check-in. If HoYoLAB ever asks for a captcha, Duet opens the official check-in page so you can do it yourself. Sign out anytime from the game page.</p></details>
+    <details><summary>Which games work?</summary><p>Genshin Impact and Honkai: Star Rail get everything: game page, pity, Resin / Trailblaze Power, check-in, codes and reset timers. Wuthering Waves gets the game page and pity tracking (in beta). Neverness to Everness gets the game page and playtime. Minecraft gets the whole launcher.</p></details>
+    <details><summary>Windows says "Windows protected your PC"</summary><p>Duet isn't code-signed yet, so SmartScreen warns about new apps. Click <b>More info → Run anyway</b>. Official downloads are only on this site and on GitHub.</p></details>
+    <details><summary>Do I need a Minecraft account?</summary><p>For Minecraft, yes — you sign in with the Microsoft account that owns Minecraft: Java Edition, on Microsoft's own page. Duet never sees your password. Microsoft sign-in is currently waiting for Mojang's approval for new launchers. Your other games don't need it.</p></details>
+    <details><summary>Can I bring my stuff from another launcher?</summary><p>Yes. Duet copies your instances from the Modrinth App, Dawn (Feather), Prism, MultiMC, CurseForge, ATLauncher, GDLauncher or the official launcher — worlds, mods, packs, settings and servers. The other launcher keeps its files.</p></details>
+    <details><summary>Who can see what I'm playing and my pity?</summary><p>Only the friends you added, and only what you allow. In Friends → Privacy you can look offline, hide what you're playing, hide your server, or stop sharing your pity.</p></details>
+    <details><summary>A video background doesn't play on Linux</summary><p>Use a <code>.webm</code> video, or install the codecs: <code>sudo apt install gstreamer1.0-libav gstreamer1.0-plugins-good</code>.</p></details>
+  </div>
 </div></section>
+
+<div class="wrap"><div class="final reveal">
+  <h2>Ready to play?</h2>
+  <p class="sub" style="margin:0 auto 28px">One download. Minecraft and all your other games, in one launcher.</p>
+  <a class="btn primary" id="final-dl" href="https://github.com/Hydrate36/duet/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg> Download Duet</a>
+</div></div>
 
 <footer><div class="wrap">
   <img src="emblem-512.png" alt=""><br>
   © 2026 Hydrate (Hydrate36). All rights reserved. · <a href="https://github.com/Hydrate36/duet">GitHub</a>
-  <div class="legal">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</div>
+  <div class="legal">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT. Genshin Impact and Honkai: Star Rail are trademarks of COGNOSPHERE (HoYoverse); Wuthering Waves of Kuro Games; Neverness to Everness of its publisher. Duet is a fan-made launcher and isn't affiliated with or endorsed by any of them. Game art shown inside Duet comes from the games' official launchers.</div>
 </div></footer>
 
 <script>
+// Fade sections in as they scroll into view.
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
 // Point the buttons at the real files of the newest release, and pick the right one for this computer.
 (async () => {
   const ua = navigator.userAgent;
@@ -176,13 +301,15 @@ footer .legal{font-size:11.5px;letter-spacing:.3px;margin-top:6px;opacity:.75}
     const r = await fetch("https://api.github.com/repos/Hydrate36/duet/releases/latest");
     if (!r.ok) return;
     const rel = await r.json();
-    document.getElementById("ver").textContent = "Version " + rel.tag_name.replace(/^v/, "") + " · Windows & Linux";
+    const v = rel.tag_name.replace(/^v/, "");
+    document.getElementById("other").textContent = "Version " + v + " · Free · Windows & Linux · updates itself";
     const url = (end) => (rel.assets.find((a) => a.name.endsWith(end)) || {}).browser_download_url;
     document.querySelectorAll("[data-asset]").forEach((a) => { const u = url(a.dataset.asset); if (u) a.href = u; });
-    const main = document.getElementById("main-dl");
     const u = url(isLinux ? "amd64.AppImage" : "x64-setup.exe");
-    if (u) { main.href = u; document.getElementById("main-dl-text").textContent = isLinux ? "Download for Linux" : "Download for Windows"; }
-    document.getElementById("other").innerHTML = isLinux ? 'Also for <a href="#download">Windows and Debian/Ubuntu</a>.' : 'Also for <a href="#download">Linux</a>.';
+    if (u) {
+      for (const id of ["main-dl", "final-dl"]) document.getElementById(id).href = u;
+      document.getElementById("main-dl-text").textContent = isLinux ? "Download for Linux" : "Download for Windows";
+    }
     document.querySelector(isLinux ? '[data-os="linux"]' : '[data-os="win"]').classList.add("rec");
   } catch { /* keep the links to the releases page */ }
 })();
