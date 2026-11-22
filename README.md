@@ -11,14 +11,14 @@
 <h3 align="center">One launcher. All your games.</h3>
 
 <p align="center">
-  Minecraft with one-click modpacks and more FPS — plus <b>Genshin Impact</b>, <b>Honkai: Star Rail</b>, <b>Wuthering Waves</b> and <b>Neverness to Everness</b>,<br>
+  Minecraft with one-click modpacks and more FPS — plus <b>Genshin Impact</b>, <b>Honkai: Star Rail</b>, <b>Zenless Zone Zero</b>, <b>Wuthering Waves</b>, <b>Neverness to Everness</b> and every Steam and Epic game you own,<br>
   with pity tracking, Resin, daily check-in and redeem codes in one place.
 </p>
 
 <p align="center">
   <a href="https://github.com/Hydrate36/duet/releases/latest"><b>⬇ Download</b></a> &nbsp;·&nbsp;
   <a href="https://hydrate36.github.io/duet/">Website</a> &nbsp;·&nbsp;
-  <a href="#-new-in-12">What's new</a> &nbsp;·&nbsp;
+  <a href="#-new-in-13">What's new</a> &nbsp;·&nbsp;
   <a href="#-faq">FAQ</a>
 </p>
 
@@ -27,6 +27,32 @@
 <p align="center">
   <img src="docs/shot-home.jpg" alt="Duet's Home" width="92%">
 </p>
+
+## ✨ New in 1.3
+
+### 🛡️ Crash check before Play
+Before Minecraft starts, Duet reads every mod and catches what would crash it: mods for another Minecraft version or loader, required mods that are missing or turned off, and the same mod installed twice. Each one has a one-click fix. It also tells you when your own Sodium keeps Voxy from loading.
+
+### 🧩 Mods your way
+- **Lock** a mod at its version so *Update all* leaves it alone
+- Read the **changelogs** before you update, and choose **stable only** or **include beta** updates
+- **Drag & drop** jars and packs straight from Explorer
+- **Copy to…** another instance, without using more disk space
+- **Mod sets**: save which mods are on and switch in one click
+- **CurseForge** next to Modrinth (with your own free API key)
+- **Modpack updates** with a changelog. Your worlds are backed up first, and the mods and settings you added yourself stay
+
+### 🌍 Worlds tab
+Back up and restore any world, or turn on automatic backups when the game closes. Your server list shows players online and the ping, and **Join** takes you straight in.
+
+### 🎮 Games
+- **Every game in one library**: Steam and Epic games are found automatically, and you can add any program
+- **Zenless Zone Zero** and **Honkai Impact 3rd**: news page, updates, redeem codes and daily check-in
+- **Pull planner**: your real chance at the featured 5★ before the banner ends
+- **Alerts** for new banners, a banner's last day, and Resin or Trailblaze Power that's almost full. They wait until you've stopped playing
+
+### ⚙️ Everything else
+Several Microsoft accounts · mini mode (Ctrl+Shift+M) · start with Windows · controller support · weekly recap · force close a frozen game · instance icons & colours · a warning before installing modpack files that aren't on Modrinth · MangoHud and GameMode on Linux
 
 ## ✨ New in 1.2
 
