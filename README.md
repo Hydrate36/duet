@@ -18,7 +18,7 @@
 <p align="center">
   <a href="https://github.com/Hydrate36/duet/releases/latest"><b>⬇ Download</b></a> &nbsp;·&nbsp;
   <a href="https://hydrate36.github.io/duet/">Website</a> &nbsp;·&nbsp;
-  <a href="#-new-in-13">What's new</a> &nbsp;·&nbsp;
+  <a href="#-new-in-14">What's new</a> &nbsp;·&nbsp;
   <a href="#-faq">FAQ</a>
 </p>
 
@@ -27,6 +27,20 @@
 <p align="center">
   <img src="docs/shot-home.jpg" alt="Duet's Home" width="92%">
 </p>
+
+## ✨ New in 1.4
+
+### 🎨 A fresh new look
+Duet got redesigned: soft and rounded, full of colour, with each game's own art across Home. Pick one of **13 two-colour themes** and the colours run through the whole app.
+
+### 🎮 Games your way
+Show your games as big tiles, small tiles or a list. Sort by recently played, most played or name, or drag them into your own order. Pin your favourites, hide what you don't play, and **search** your library.
+
+### 🛠️ Voxy and Sodium, fixed in one click
+If your own Sodium keeps Voxy from loading, **Fix it** puts in the Sodium version Voxy needs and matching versions of Sodium Extra, Reese's Sodium Options and Iris. The old files are kept, never deleted.
+
+### ⚙️ Everything else
+Skip mod warnings you already know about (they stay skipped after a mod update) or turn the check off per instance · Duet's own updates on Home, in News · dismiss update banners · every game in your library gets its picture · new logo
 
 ## ✨ New in 1.3
 
