@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duet Hardware & Software Survey</title>
+<meta name="description" content="What Duet players play on: graphics cards, processors, memory, operating systems, screens and Minecraft versions, from anonymous answers players chose to share.">
+<meta property="og:title" content="Duet Hardware & Software Survey">
+<meta property="og:description" content="What Duet players play on, from anonymous answers players chose to share.">
+<meta property="og:image" content="img/dash.webp">
+<meta name="theme-color" content="#0e0b14">
+<meta name="color-scheme" content="dark">
+<meta name="darkreader-lock">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --a: #ff7ab6; --b: #8b7bff; --ta: 255, 122, 182; --tb: 139, 123, 255;
+  --bg: #0b0910; --panel: #15111d; --panel2: #1b1625; --line: rgba(255, 255, 255, .08);
+  --text: #f4f0f8; --sub: #b7aec4; --dim: #8a8199; --up: #6ee7a8; --down: #ff8fa3;
+  --grad: linear-gradient(120deg, var(--a), var(--b));
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font: 16px/1.6 "Hanken Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: .45; }
+.blob.b1 { width: 55vw; height: 55vw; left: -15vw; top: -25vw; background: radial-gradient(circle, rgba(var(--ta), .55), transparent 65%); }
+.blob.b2 { width: 50vw; height: 50vw; right: -18vw; top: 20vh; background: radial-gradient(circle, rgba(var(--tb), .5), transparent 65%); }
+.wrap { width: min(1180px, 92vw); margin: 0 auto; }
+
+nav.top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 22px; padding: 16px max(4vw, calc((100vw - 1180px) / 2)); background: rgba(11, 9, 16, .72); backdrop-filter: blur(16px) saturate(1.4); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 20px; }
+.brand img { width: 30px; height: 30px; border-radius: 9px; }
+nav.top .grow { flex: 1; }
+nav.top .lnk { color: var(--sub); font-weight: 600; font-size: 15px; }
+nav.top .lnk:hover { color: var(--text); }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 14px; font-weight: 700; font-size: 15px; background: var(--grad); color: #fff; box-shadow: 0 10px 30px -10px rgba(var(--ta), .8); }
+
+header.hero { padding: 70px 0 34px; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--a); }
+.kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 14px rgba(var(--ta), .9); }
+h1 { font-family: var(--display); font-size: clamp(44px, 7vw, 84px); line-height: .98; letter-spacing: -.02em; margin-top: 14px; }
+h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { color: var(--sub); font-size: 18px; max-width: 720px; margin-top: 18px; }
+.meta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 24px; }
+.meta select { height: 42px; padding: 0 14px; border-radius: 12px; background: var(--panel); color: var(--text); border: 1px solid var(--line); font: inherit; font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: 99px; background: rgba(255, 255, 255, .05); border: 1px solid var(--line); color: var(--sub); font-size: 14px; font-weight: 600; }
+.chip b { color: var(--text); }
+
+.demo { margin: 0 0 22px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 196, 80, .1); border: 1px solid rgba(255, 196, 80, .35); color: #ffd98a; font-weight: 600; font-size: 14px; }
+
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.card { position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015)); border: 1px solid var(--line); border-radius: 22px; padding: 20px 22px; }
+.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: var(--grad); opacity: .7; }
+.card .lab { color: var(--dim); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.card .big { font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1.05; margin-top: 8px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.card .what { margin-top: 6px; font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.split { margin-top: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 20px 22px; }
+.split h3 { font-family: var(--display); font-size: 20px; }
+.split .s { color: var(--dim); font-size: 14px; }
+.stack { display: flex; height: 18px; border-radius: 99px; overflow: hidden; margin: 14px 0 12px; background: rgba(255, 255, 255, .05); }
+.stack span { height: 100%; transition: width .8s cubic-bezier(.2, .8, .2, 1); }
+.legend { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; color: var(--sub); }
+.legend b { color: var(--text); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px; vertical-align: 1px; }
+.splits { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+main.body { display: grid; grid-template-columns: 220px 1fr; gap: 28px; margin: 34px auto 80px; align-items: start; }
+aside.toc { position: sticky; top: 92px; display: grid; gap: 2px; }
+aside.toc a { padding: 9px 14px; border-radius: 12px; color: var(--sub); font-weight: 600; font-size: 15px; transition: background .2s, color .2s; }
+aside.toc a:hover { color: var(--text); background: rgba(255, 255, 255, .04); }
+aside.toc a.on { color: var(--text); background: rgba(var(--ta), .12); box-shadow: inset 2px 0 0 var(--a); }
+.sec { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 22px 24px 14px; margin-bottom: 16px; scroll-margin-top: 92px; }
+.sec .hd { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.sec h2 { font-family: var(--display); font-size: 24px; letter-spacing: -.01em; }
+.sec .hd .s { color: var(--dim); font-size: 14px; }
+.sec .hd .grow { flex: 1; }
+.sec .hd .col { color: var(--dim); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 72px 78px; gap: 14px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.row:first-of-type { border-top: 0; }
+.row[hidden] { display: none; }
+.row .nm { min-width: 0; }
+.row .nm div { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .05); margin-top: 7px; overflow: hidden; }
+.bar span { display: block; height: 100%; border-radius: 99px; background: var(--grad); width: 0; transition: width .9s cubic-bezier(.2, .8, .2, 1); box-shadow: 0 0 16px rgba(var(--ta), .45); }
+.row:nth-of-type(n+2) .bar span { opacity: .82; }
+.row .pc { text-align: right; font-family: var(--display); font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums; }
+.row .ch { text-align: right; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ch.up { color: var(--up); } .ch.down { color: var(--down); } .ch.same { color: var(--dim); } .ch.new { color: var(--b); }
+.more { display: block; width: 100%; margin: 6px 0 4px; padding: 10px; border-radius: 12px; border: 1px dashed var(--line); background: none; color: var(--sub); font: inherit; font-weight: 600; cursor: pointer; }
+.more:hover { color: var(--text); border-color: rgba(var(--ta), .5); }
+
+.empty { text-align: center; padding: 70px 20px 90px; }
+.empty h2 { font-family: var(--display); font-size: 34px; }
+.empty p { color: var(--sub); max-width: 560px; margin: 12px auto 0; }
+.prog { width: min(420px, 80vw); height: 12px; margin: 26px auto 8px; border-radius: 99px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+.prog span { display: block; height: 100%; background: var(--grad); border-radius: 99px; }
+
+.about { color: var(--sub); font-size: 15px; background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 22px 24px; }
+.about h2 { font-family: var(--display); font-size: 22px; color: var(--text); margin-bottom: 8px; }
+.about p + p { margin-top: 8px; }
+footer { padding: 40px 0 60px; color: var(--dim); font-size: 14px; }
+footer .wrap { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+footer .grow { flex: 1; }
+footer a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .splits { grid-template-columns: 1fr; }
+  main.body { grid-template-columns: 1fr; }
+  aside.toc { position: static; display: flex; flex-wrap: wrap; }
+  nav.top .lnk { display: none; }
+}
+@media (max-width: 520px) { .cards { grid-template-columns: 1fr; } .row { grid-template-columns: minmax(0, 1fr) 60px 64px; gap: 10px; } }
+@media (prefers-reduced-motion: reduce) { .bar span, .stack span { transition: none; } }
+</style>
+</head>
+<body>
+<div class="sky"><div class="blob b1"></div><div class="blob b2"></div></div>
+<nav class="top">
+  <a class="brand" href="./"><img src="img/logo.png" alt="">Duet</a>
+  <a class="lnk" href="./#features">Features</a><a class="lnk" href="./#faq">FAQ</a><a class="lnk" href="survey.html" style="color:var(--text)">Survey</a>
+  <div class="grow"></div>
+  <a class="btn" href="https://github.com/Hydrate36/duet/releases/latest" id="dl">Download Duet</a>
+</nav>
+
+<header class="hero wrap">
+  <span class="kicker"><i></i>Duet Hardware &amp; Software Survey</span>
+  <h1 id="title">What Duet players <span>play on</span></h1>
+  <p class="lead" id="lead">Every so often Duet asks its players if they'd like to share anonymous info about their PC. These are the results: what's common, what's growing, and what we should make faster.</p>
+  <div class="meta" id="meta"></div>
+</header>
+
+<div class="wrap" id="top"></div>
+<main class="body wrap" id="body"></main>
+
+<div class="wrap" style="margin-bottom:30px">
+  <div class="about" id="how">
+    <h2>How this survey works</h2>
+    <p>Duet only sends an answer when a player says yes, and it shows everything first: graphics card, processor, memory, operating system, screen size, Java and Duet versions, language, and which Minecraft versions and mod loaders they use. There's no name, no account and no IP address in it, and each Duet answers once per survey.</p>
+    <p>Only totals are shown here, never single answers. Entries with very few answers are grouped into "Other". Minecraft versions, mod loaders and Java can have more than one answer per player, so those percentages can add up to more than 100%.</p>
+  </div>
+</div>
+
+<footer><div class="wrap"><a class="brand" href="./"><img src="img/logo.png" alt="" style="width:26px;height:26px;border-radius:8px">Duet</a><span>Made by Hydrate</span><div class="grow"></div><a href="./">Home</a><a href="https://github.com/Hydrate36/duet/releases" target="_blank" rel="noopener">Releases</a><span>Not affiliated with Mojang, Microsoft, HoYoverse or Kuro Games.</span></div></footer>
+
+<script>
+const API = "https://duet-friends.duet-launcher.workers.dev/v1/survey/results";
+const CATS = [
+  ["gpu", "Graphics cards", "Main graphics card"],
+  ["cpu", "Processors", ""],
+  ["ram", "System memory", "RAM"],
+  ["threads", "CPU threads", "Logical processors"],
+  ["os", "Operating systems", ""],
+  ["screen", "Screen resolution", "Primary display"],
+  ["tier", "PC tier", "How Duet's auto-tune rates the PC"],
+  ["minecraft", "Minecraft versions", "Versions players have instances for"],
+  ["loaders", "Mod loaders", "Loaders players use"],
+  ["java", "Java versions", "Installed Java runtimes"],
+  ["lang", "Languages", "Duet's language"],
+  ["duet", "Duet versions", ""],
+];
+const MULTI = new Set(["minecraft", "loaders", "java"]);
+const SHOW = 10;
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const langName = (() => { try { const d = new Intl.DisplayNames(["en"], { type: "language" }); return (c) => { try { return d.of(c) || c; } catch { return c; } }; } catch { return (c) => c; } })();
+const tierName = { high: "High-end", mid: "Mid-range", low: "Entry-level" };
+const loaderName = { fabric: "Fabric", quilt: "Quilt", forge: "Forge", neoforge: "NeoForge", vanilla: "Vanilla" };
+const label = (k, v) => k === "lang" ? langName(v) : k === "tier" ? (tierName[v] || v) : k === "loaders" ? (loaderName[v] || v) : k === "java" ? "Java " + v : k === "duet" && v !== "Other" ? "Duet " + v : v;
+const pct = (n, total) => (total ? (100 * n) / total : 0);
+const fmt = (p) => (p >= 10 ? p.toFixed(1) : p.toFixed(2)) + "%";
+const date = (ms) => new Date(ms).toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" });
+
+function vendor(g) {
+  const s = g.toLowerCase();
+  if (/nvidia|geforce|rtx|gtx|quadro/.test(s)) return "NVIDIA";
+  if (/amd|radeon|\brx\b/.test(s)) return "AMD";
+  if (/intel|arc|iris|uhd/.test(s)) return "Intel";
+  if (/apple|m\d/.test(s)) return "Apple";
+  return "Other";
+}
+function osFamily(o) {
+  const s = o.toLowerCase();
+  if (s.includes("windows 11")) return "Windows 11";
+  if (s.includes("windows 10")) return "Windows 10";
+  if (s.includes("windows")) return "Windows (older)";
+  if (/linux|ubuntu|fedora|arch|mint|debian|steamos|pop!/.test(s)) return "Linux";
+  if (/mac|darwin/.test(s)) return "macOS";
+  return "Other";
+}
+const group = (rows, fn) => { const m = {}; for (const [k, n] of rows || []) { const g = k === "Other" ? "Other" : fn(k); m[g] = (m[g] || 0) + n; } return Object.entries(m).sort((a, b) => (a[0] === "Other") - (b[0] === "Other") || b[1] - a[1]); };
+const COLORS = ["#ff7ab6", "#8b7bff", "#39d0c4", "#ffb84d", "#6c6680"];
+
+function splitBar(title, sub, rows, total) {
+  const parts = rows.map(([k, n], i) => `<span style="width:${pct(n, total)}%;background:${COLORS[i % COLORS.length]}" title="${esc(k)}"></span>`).join("");
+  const legend = rows.map(([k, n], i) => `<span><i style="background:${COLORS[i % COLORS.length]}"></i>${esc(k)} <b>${fmt(pct(n, total))}</b></span>`).join("");
+  return `<div class="split"><h3>${title}</h3><div class="s">${sub}</div><div class="stack">${parts}</div><div class="legend">${legend}</div></div>`;
+}
+
+function render(d, demo) {
+  const top = document.getElementById("top"), body = document.getElementById("body"), meta = document.getElementById("meta");
+  if (!d.survey) {
+    const r = d.running;
+    document.getElementById("title").innerHTML = r ? `The first survey <span>is running</span>` : `No survey <span>yet</span>`;
+    top.innerHTML = "";
+    body.style.display = "block";
+    body.innerHTML = `<div class="empty">${r
+      ? `<h2>${esc(r.answers)} of ${esc(r.needed)} answers so far</h2><div class="prog"><span style="width:${Math.min(100, pct(r.answers, r.needed))}%"></span></div><p>Results show up here once enough players have answered. Duet asks every player once, so keep it open for a bit. Thanks to everyone sharing!</p>`
+      : `<h2>The first survey hasn't started</h2><p>When it starts, Duet will ask its players once, and the results land right here.</p>`}</div>`;
+    return;
+  }
+  const s = d.survey, f = d.fields, prev = d.previous, n = s.answers;
+  document.getElementById("title").innerHTML = `${esc(s.name)} <span>results</span>`;
+  document.getElementById("lead").textContent = `From ${n.toLocaleString("en")} Duet players who chose to share their PC's details${s.ended ? `, ${date(s.started)} to ${date(s.ended)}` : `, since ${date(s.started)} (still running)`}.`;
+  const opts = d.surveys.map((x) => `<option value="${x.id}"${x.id === s.id ? " selected" : ""}>${esc(x.name)} · ${x.answers.toLocaleString("en")} answers</option>`).join("");
+  meta.innerHTML = `${d.surveys.length > 1 ? `<select id="pick" aria-label="Survey">${opts}</select>` : ""}<span class="chip"><b>${n.toLocaleString("en")}</b> players</span>${prev ? `<span class="chip">Change vs. <b>${esc(prev.name)}</b></span>` : ""}${d.running && d.running.id !== s.id ? `<span class="chip">Next survey running: <b>${esc(d.running.answers)}</b> answers</span>` : ""}`;
+  const pick = document.getElementById("pick");
+  if (pick) pick.onchange = () => load(pick.value);
+
+  const first = (k) => (f[k] || []).find(([v]) => v !== "Other") || ["—", 0];
+  const big = (lab, k, sub) => { const [v, c] = first(k); return `<div class="card"><div class="lab">${lab}</div><div class="big">${fmt(pct(c, n))}</div><div class="what">${esc(label(k, v))}${sub ? ` <span style="color:var(--dim);font-weight:500">${sub}</span>` : ""}</div></div>`; };
+  const ram16 = (f.ram || []).filter(([v]) => /9–16|17–32|more than 32/.test(v)).reduce((a, [, c]) => a + c, 0);
+  top.innerHTML = `${demo ? `<div class="demo">Example data — this is how the page looks. Real results appear here once the first survey has enough answers.</div>` : ""}
+    <div class="cards">${big("Top graphics card", "gpu")}${`<div class="card"><div class="lab">9 GB of RAM or more</div><div class="big">${fmt(pct(ram16, n))}</div><div class="what">of players</div></div>`}${big("Most played version", "minecraft", "Minecraft")}${big("Top loader", "loaders")}</div>
+    <div class="splits">${splitBar("Graphics card makers", "Share of players by GPU vendor", group(f.gpu, vendor), n)}${splitBar("Operating systems", "Windows 11, Windows 10 and Linux", group(f.os, osFamily), n)}</div>`;
+
+  body.style.display = "";
+  const cats = CATS.filter(([k]) => (f[k] || []).length);
+  body.innerHTML = `<aside class="toc">${cats.map(([k, t]) => `<a href="#c-${k}" data-k="${k}">${t}</a>`).join("")}</aside><div>${cats.map(([k, t, sub]) => section(k, t, sub, f[k], prev && prev.fields[k], n, prev && prev.answers)).join("")}</div>`;
+  requestAnimationFrame(() => requestAnimationFrame(() => document.querySelectorAll(".bar span[data-w]").forEach((b) => (b.style.width = b.dataset.w))));
+  body.querySelectorAll(".more").forEach((b) => (b.onclick = () => { b.parentElement.querySelectorAll(".row[hidden]").forEach((r) => (r.hidden = false)); b.remove(); requestAnimationFrame(() => document.querySelectorAll(".bar span[data-w]").forEach((x) => (x.style.width = x.dataset.w))); }));
+  const links = [...body.querySelectorAll("aside.toc a")];
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.dataset.k === e.target.id.slice(2))); }), { rootMargin: "-40% 0px -55% 0px" });
+  body.querySelectorAll(".sec").forEach((x) => io.observe(x));
+}
+
+const otherLast = (rows) => [...(rows || [])].sort((a, b) => (a[0] === "Other") - (b[0] === "Other") || b[1] - a[1]);
+function section(k, title, sub, rows, prevRows, n, pn) {
+  rows = otherLast(rows);
+  const before = {}; for (const [v, c] of prevRows || []) before[v] = pct(c, pn);
+  const max = Math.max(...rows.map(([, c]) => pct(c, n)), 1);
+  const body = rows.map(([v, c], i) => {
+    const p = pct(c, n);
+    let ch = `<span class="ch same">—</span>`;
+    if (prevRows) {
+      if (before[v] === undefined) ch = `<span class="ch new">new</span>`;
+      else { const dlt = p - before[v]; ch = Math.abs(dlt) < 0.05 ? `<span class="ch same">0.00%</span>` : `<span class="ch ${dlt > 0 ? "up" : "down"}">${dlt > 0 ? "+" : "−"}${Math.abs(dlt).toFixed(2)}%</span>`; }
+    }
+    return `<div class="row"${i >= SHOW ? " hidden" : ""}><div class="nm"><div title="${esc(label(k, v))}">${esc(label(k, v))}</div><div class="bar"><span data-w="${(100 * p) / max}%"></span></div></div><div class="pc">${fmt(p)}</div>${ch}</div>`;
+  }).join("");
+  return `<section class="sec" id="c-${k}"><div class="hd"><h2>${title}</h2><span class="s">${sub}${MULTI.has(k) ? " · more than one per player" : ""}</span><span class="grow"></span><span class="col">Share</span><span class="col" style="width:78px;text-align:right">Change</span></div>${body}${rows.length > SHOW ? `<button class="more">Show all ${rows.length}</button>` : ""}</section>`;
+}
+
+// What the page looks like before there are real results: survey.html?demo
+function demoData() {
+  const T = (o) => Object.entries(o).sort((a, b) => b[1] - a[1]);
+  const cur = {
+    gpu: T({ "NVIDIA GeForce RTX 4060": 702, "NVIDIA GeForce RTX 3060": 491, "AMD Radeon RX 6600": 318, "NVIDIA GeForce RTX 4070": 289, "NVIDIA GeForce GTX 1650": 247, "Intel(R) UHD Graphics": 211, "NVIDIA GeForce RTX 3070": 166, "AMD Radeon RX 7800 XT": 141, "NVIDIA GeForce RTX 4060 Laptop GPU": 133, "AMD Radeon(TM) Graphics": 102, "NVIDIA GeForce RTX 5070": 88, "Intel(R) Arc(TM) A750": 31, Other: 293 }),
+    cpu: T({ "AMD Ryzen 5 5600": 402, "AMD Ryzen 7 7800X3D": 288, "Intel Core i5-12400F": 276, "AMD Ryzen 5 7600": 241, "Intel Core i7-12700H": 198, "AMD Ryzen 7 5700X3D": 177, "Intel Core i5-13400F": 162, "Intel Core i3-10100F": 98, Other: 1381 }),
+    ram: T({ "9–16 GB": 1504, "17–32 GB": 1201, "5–8 GB": 302, "more than 32 GB": 147, "4 GB or less": 69 }),
+    threads: T({ "9–16": 1873, "5–8": 702, "more than 16": 561, "1–4": 87 }),
+    os: T({ "Windows 11 Home": 1617, "Windows 10 Home": 702, "Windows 11 Pro": 455, "Windows 10 Pro": 201, "Linux (Ubuntu 24.04)": 98, "Linux (Arch Linux)": 61, "Linux (Fedora Linux 43)": 39, Other: 50 }),
+    screen: T({ "1920x1080": 1745, "2560x1440": 811, "1366x768": 166, "3840x2160": 154, "1920x1200": 120, "2560x1080": 74, Other: 153 }),
+    tier: T({ mid: 1622, high: 1049, low: 552 }),
+    minecraft: T({ "1.21.11": 1891, "1.20.1": 1045, "1.21.1": 766, "1.21.4": 402, "1.19.2": 210, "1.12.2": 99, "1.8.9": 87, Other: 120 }),
+    loaders: T({ fabric: 2418, neoforge: 913, forge: 822, vanilla: 655, quilt: 76 }),
+    java: T({ "21": 2711, "17": 1690, "25": 702, "8": 512 }),
+    lang: T({ en: 1404, de: 512, es: 311, pt: 277, fr: 166, pl: 141, ru: 132, tr: 101, Other: 179 }),
+    duet: T({ "1.4.1": 2112, "1.4.0": 702, "1.3.2": 309, Other: 100 }),
+  };
+  const prev = JSON.parse(JSON.stringify(cur));
+  const nudge = (k, v, by) => { const r = prev[k].find((x) => x[0] === v); if (r) r[1] = Math.max(0, r[1] + by); };
+  nudge("gpu", "NVIDIA GeForce RTX 4060", -60); nudge("gpu", "NVIDIA GeForce GTX 1650", 40); prev.gpu = prev.gpu.filter((x) => x[0] !== "NVIDIA GeForce RTX 5070");
+  nudge("minecraft", "1.21.11", -240); nudge("minecraft", "1.20.1", 90); nudge("os", "Windows 10 Home", 70); nudge("ram", "17–32 GB", -50); nudge("loaders", "neoforge", -80);
+  return {
+    surveys: [{ id: 2, name: "December 2026", started: Date.UTC(2026, 11, 1), ended: null, answers: 3223 }, { id: 1, name: "October 2026", started: Date.UTC(2026, 9, 1), ended: Date.UTC(2026, 9, 31), answers: 2874 }],
+    running: { id: 2, name: "December 2026", answers: 3223, needed: 20 },
+    survey: { id: 2, name: "December 2026", started: Date.UTC(2026, 11, 1), ended: null, answers: 3223 },
+    fields: cur,
+    previous: { id: 1, name: "October 2026", answers: 3150, fields: prev },
+  };
+}
+
+async function load(id) {
+  const demo = new URLSearchParams(location.search).has("demo");
+  if (demo) return render(demoData(), true);
+  try {
+    const r = await fetch(API + (id ? "?id=" + encodeURIComponent(id) : ""));
+    if (!r.ok) throw new Error();
+    render(await r.json(), false);
+  } catch {
+    document.getElementById("body").innerHTML = `<div class="empty" style="grid-column:1/-1"><h2>Couldn't load the results</h2><p>The survey server didn't answer. Try again in a moment.</p></div>`;
+  }
+}
+load();
+
+// Point the Download button at this computer's file, like on the home page.
+(async () => {
+  try {
+    const ua = navigator.userAgent, isLinux = /Linux/i.test(ua) && !/Android/i.test(ua), isWin = /Windows/i.test(ua);
+    if (!isLinux && !isWin) return;
+    const r = await fetch("https://api.github.com/repos/Hydrate36/duet/releases/latest");
+    if (!r.ok) return;
+    const rel = await r.json();
+    const a = rel.assets.find((x) => x.name.endsWith(isLinux ? "amd64.AppImage" : "x64-setup.exe"));
+    if (a) document.getElementById("dl").href = a.browser_download_url;
+  } catch { /* keep the releases link */ }
+})();
+</script>
+</body>
+</html>

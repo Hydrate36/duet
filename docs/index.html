@@ -213,6 +213,24 @@ footer a:hover { color: var(--text); }
 }
 @media (max-width: 560px) { nav.top .btn.soft { display: none; } .chip { display: none; } .final { padding: 60px 22px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .rv { opacity: 1; transform: none; } }
+
+/* bug report dialog */
+dialog.bug { margin: auto; width: min(560px, 92vw); padding: 0; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); color: var(--text); box-shadow: 0 40px 120px -20px rgba(0, 0, 0, .8), 0 0 0 1px rgba(var(--ta), .15); }
+dialog.bug::backdrop { background: rgba(5, 3, 10, .7); backdrop-filter: blur(6px); }
+dialog.bug form { display: grid; gap: 12px; padding: 28px; }
+dialog.bug h3 { font-family: var(--display); font-size: 26px; line-height: 1.1; }
+dialog.bug p { color: var(--sub); font-size: 15px; }
+dialog.bug textarea, dialog.bug input[type=text] { width: 100%; font: inherit; color: var(--text); background: rgba(255, 255, 255, .04); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; outline: none; }
+dialog.bug textarea { min-height: 140px; resize: vertical; }
+dialog.bug textarea:focus, dialog.bug input[type=text]:focus { border-color: rgba(var(--ta), .6); box-shadow: 0 0 0 4px rgba(var(--ta), .14); }
+dialog.bug .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+dialog.bug .row { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+dialog.bug .msg { font-size: 14px; min-height: 1.2em; }
+dialog.bug .msg.bad { color: #ffb3bf; }
+dialog.bug .msg.good { color: #9ff0c6; }
+dialog.bug .small { font-size: 13px; color: var(--dim); }
+button.linkish { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; }
+footer button.linkish:hover { color: var(--text); }
 </style>
 </head>
 <body>
@@ -222,7 +240,7 @@ footer a:hover { color: var(--text); }
 
 <nav class="top" id="nav">
   <a class="brand" href="#"><img src="img/logo.png" alt="">Duet</a>
-  <div class="links"><a href="#themes">Themes</a><a href="#features">Features</a><a href="#minecraft">Minecraft</a><a href="#faq">FAQ</a></div>
+  <div class="links"><a href="#themes">Themes</a><a href="#features">Features</a><a href="#minecraft">Minecraft</a><a href="#faq">FAQ</a><a href="survey.html">Survey</a></div>
   <div class="grow"></div>
   <a class="btn soft" href="https://github.com/Hydrate36/duet" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
   <a class="btn main dl" href="https://github.com/Hydrate36/duet/releases/latest">Download</a>
@@ -375,6 +393,8 @@ footer a:hover { color: var(--text); }
       <details class="rv"><summary>Can I bring my stuff from another launcher?</summary><p>Yes. Duet copies your instances from the Modrinth App, Dawn (Feather), Prism, MultiMC, CurseForge, ATLauncher, GDLauncher or the official launcher: worlds, mods, packs, settings and servers. The other launcher keeps its files.</p></details>
       <details class="rv"><summary>Who can see what I'm playing?</summary><p>Only the friends you added, and only what you allow. In Friends → Privacy you can look offline, hide what you're playing, hide your server, or stop sharing your pity.</p></details>
       <details class="rv"><summary>A video background doesn't play on Linux</summary><p>Use a .webm video, or install the codecs: <code>sudo apt install gstreamer1.0-libav gstreamer1.0-plugins-good</code>.</p></details>
+      <details class="rv"><summary>Found a bug?</summary><p>Tell us! In Duet go to <b>Settings → Report a bug</b> (it can add your Duet version and PC details for you), or <button class="linkish" type="button" data-bug style="color:var(--a);font-weight:700">report it here</button>. Leave a Discord name or email if you'd like an answer.</p></details>
+      <details class="rv"><summary>What does the hardware survey send?</summary><p>Now and then Duet may ask if you want to share anonymous info about your PC, so we know which hardware to make Duet faster on. It only sends if you say yes, and it shows you everything first: graphics card, processor, memory, operating system, screen size, Java and Duet versions, language, and which Minecraft versions and mod loaders you use. No name, no account, no IP address. You can turn the question off in Settings. The totals are public on the <a href="survey.html" style="color:var(--a);font-weight:700">survey page</a>.</p></details>
     </div>
   </div>
 </section>
@@ -396,7 +416,19 @@ footer a:hover { color: var(--text); }
   </div>
 </section>
 
-<footer><div class="wrap"><a class="brand" href="#"><img src="img/logo.png" alt="" style="width:26px;height:26px;border-radius:8px">Duet</a><span>Made by Hydrate</span><div class="grow"></div><a href="https://github.com/Hydrate36/duet" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Hydrate36/duet/releases" target="_blank" rel="noopener">Releases</a><span>Not affiliated with Mojang, Microsoft, HoYoverse or Kuro Games.</span></div></footer>
+<dialog class="bug" id="bug">
+  <form method="dialog" id="bug-form">
+    <h3>Report a bug</h3>
+    <p>What happened, and what did you expect? Steps to make it happen again help the most.</p>
+    <textarea name="text" required minlength="10" maxlength="4000" placeholder="For example: I click Play on my Fabric 1.21.11 pack and Minecraft closes right after the Mojang screen."></textarea>
+    <input type="text" name="contact" maxlength="200" placeholder="Discord name or email, if you want an answer (optional)">
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="small">Tip: reporting from Duet (Settings → Report a bug) can add your Duet version and PC details for you.</div>
+    <div class="msg" id="bug-msg" role="status"></div>
+    <div class="row"><button class="btn soft" type="button" id="bug-cancel">Cancel</button><button class="btn main" type="submit" id="bug-send">Send report</button></div>
+  </form>
+</dialog>
+<footer><div class="wrap"><a class="brand" href="#"><img src="img/logo.png" alt="" style="width:26px;height:26px;border-radius:8px">Duet</a><span>Made by Hydrate</span><div class="grow"></div><a href="https://github.com/Hydrate36/duet" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Hydrate36/duet/releases" target="_blank" rel="noopener">Releases</a><a href="survey.html">Hardware survey</a><button class="linkish" type="button" data-bug>Report a bug</button><span>Not affiliated with Mojang, Microsoft, HoYoverse or Kuro Games.</span></div></footer>
 
 <script>
 const THEMES = [
@@ -493,6 +525,31 @@ const draw = (t) => {
   if (!still) requestAnimationFrame(draw);
 };
 requestAnimationFrame(draw);
+
+// Bug reports go to the Duet server (the same one the launcher uses).
+const bugDlg = document.getElementById("bug"), bugForm = document.getElementById("bug-form"), bugMsg = document.getElementById("bug-msg"), bugSend = document.getElementById("bug-send");
+document.querySelectorAll("[data-bug]").forEach((b) => b.addEventListener("click", () => { bugMsg.textContent = ""; bugMsg.className = "msg"; bugDlg.showModal(); }));
+document.getElementById("bug-cancel").onclick = () => bugDlg.close();
+bugDlg.addEventListener("click", (e) => { if (e.target === bugDlg) bugDlg.close(); });
+bugForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = new FormData(bugForm);
+  const text = String(f.get("text") || "").trim();
+  if (text.length < 10) { bugMsg.textContent = "Please describe what happened (at least a sentence)."; bugMsg.className = "msg bad"; return; }
+  bugSend.disabled = true; bugSend.textContent = "Sending…";
+  try {
+    const r = await fetch("https://duet-friends.duet-launcher.workers.dev/v1/bug", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ source: "web", text, contact: f.get("contact"), website: f.get("website") }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || "Couldn't send it right now. Try again in a bit.");
+    bugForm.reset();
+    bugMsg.textContent = "Thanks! Your report was sent."; bugMsg.className = "msg good";
+    setTimeout(() => bugDlg.open && bugDlg.close(), 2200);
+  } catch (err) {
+    bugMsg.textContent = err.message || "Couldn't send it right now. Try again in a bit."; bugMsg.className = "msg bad";
+  } finally {
+    bugSend.disabled = false; bugSend.textContent = "Send report";
+  }
+});
 
 // Point the buttons at the real files of the newest release, and pick the right one for this computer.
 (async () => {
