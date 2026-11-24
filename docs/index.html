@@ -9,11 +9,14 @@
 <meta property="og:description" content="Minecraft, your gacha games, Steam and Epic in one beautiful launcher. Free for Windows and Linux.">
 <meta property="og:image" content="img/dash.webp">
 <meta name="theme-color" content="#0e0b14">
+<meta name="color-scheme" content="dark">
+<meta name="darkreader-lock">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
+  color-scheme: dark;
   --a: #ff7ab6; --b: #8b7bff; --ta: 255, 122, 182; --tb: 139, 123, 255;
   --bg: #0b0910; --panel: #15111d; --line: rgba(255, 255, 255, .08);
   --text: #f4f0f8; --sub: #b7aec4; --dim: #8a8199;
@@ -104,7 +107,7 @@ nav.top.solid { background: rgba(16, 12, 24, .82); box-shadow: 0 20px 50px -20px
 /* ── themes ────────────────────────────────────────── */
 .themes { display: grid; grid-template-columns: 1fr 1.55fr; gap: 50px; align-items: center; }
 .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 30px 0 18px; max-width: 420px; }
-.sw { aspect-ratio: 1; border-radius: 20px; border: 0; cursor: pointer; background: linear-gradient(135deg, var(--x), var(--y)); position: relative; transition: transform .25s; box-shadow: inset 0 0 0 3px rgba(0, 0, 0, .15); }
+.sw { min-height: 56px; aspect-ratio: 1; border-radius: 20px; border: 0; cursor: pointer; appearance: none; padding: 0; background: linear-gradient(135deg, var(--x), var(--y)) !important; position: relative; transition: transform .25s; box-shadow: inset 0 0 0 3px rgba(0, 0, 0, .15); }
 .sw:hover { transform: translateY(-3px) scale(1.04); }
 .sw.on { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--x), 0 12px 30px -8px var(--x); }
 .sw-name { font-weight: 700; color: var(--sub); }
@@ -409,6 +412,7 @@ const sw = document.getElementById("swatches"), tframe = document.getElementById
 THEMES.forEach(([id, name, , a, b], i) => {
   const btn = document.createElement("button");
   btn.className = "sw" + (i ? "" : " on"); btn.style.setProperty("--x", a); btn.style.setProperty("--y", b);
+  btn.style.backgroundImage = "linear-gradient(135deg, " + a + ", " + b + ")"; btn.style.backgroundColor = a;
   btn.setAttribute("aria-label", name + " theme");
   btn.onclick = () => { auto = false; pick(i); };
   sw.appendChild(btn);
