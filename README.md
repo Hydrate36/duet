@@ -17,7 +17,7 @@
 
 <p align="center">
   <a href="https://github.com/Hydrate36/duet/releases/latest"><b>⬇ Download</b></a> &nbsp;·&nbsp;
-  <a href="https://hydrate36.github.io/duet/">Website</a> &nbsp;·&nbsp;
+  <a href="https://duetlauncher.com">Website</a> &nbsp;·&nbsp;
   <a href="#-new-in-14">What's new</a> &nbsp;·&nbsp;
   <a href="#-faq">FAQ</a>
 </p>
